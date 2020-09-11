@@ -12,7 +12,7 @@ import argparse
 def create_parser():
     """Returns an instance of argparse.ArgumentParser"""
     parser = argparse.ArgumentParser(
-            description="Perform transformation on input text.")
+        description="Perform transformation on input text.")
     parser.add_argument('-u', '--upper', help='convert text to uppercase',
                         action='store_true')
     parser.add_argument('-l', '--lower', help='convert text to lowercase',
@@ -20,7 +20,7 @@ def create_parser():
     parser.add_argument('-t', '--title', help='convert text to titlecase',
                         action='store_true')
     parser.add_argument('text', help='text to be manipulated',
-                        type=str, nargs='+')
+                        type=str, nargs=1)
     return parser
 
 
@@ -29,25 +29,18 @@ def main(args):
     parser = create_parser()
     ns = parser.parse_args(args)
 
-    """
-    with open('USAGE') as f:
-            expected_lst = f.read().splitlines()
-            expected = '\n'.join(expected_lst)
-    print(expected)
-    """
-
     if not ns:
         parser.print_usage()
         sys.exit(1)
 
     echo_text = ' '.join(ns.text)
 
-    if ns.upper:
-        print(echo_text.upper())
+    if ns.title:
+        print(echo_text.title())
     elif ns.lower:
         print(echo_text.lower())
-    elif ns.title:
-        print(echo_text.title())
+    elif ns.upper:
+        print(echo_text.upper())
     else:
         print(echo_text)
 

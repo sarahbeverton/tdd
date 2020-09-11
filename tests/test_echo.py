@@ -78,10 +78,6 @@ class TestEcho(unittest.TestCase):
         self.assertTrue(ns.lower)
         self.assertEqual(ns.text[0], args[1])
 
-        # check if --upper and --title returns false with assert
-        # check if -l returns true with assert
-        # check if arg gives back expected result (assertequal)
-
     def test_echo(self):
         """Check if main() function prints anything at all"""
         module_to_test = self.module.__file__
@@ -143,14 +139,13 @@ class TestEcho(unittest.TestCase):
         output = run_capture(self.module.__file__, args)
         self.assertEqual(output[0], "Hello World")
 
-    ##FINISH
     def test_help_message(self):
         """Checking for correct help message display"""
+        expected = ""
         with open('USAGE') as f:
-            expected_lst = f.read().splitlines()
-            expected = '\n'.join(expected_lst)
+            expected = f.read().splitlines()
         output = run_capture(self.module.__file__, ['-h'])
-        self.assertEqual(output, expected)
+        self.assertListEqual(output, expected)
 
     #
     # Students: add a flake8 test here.
